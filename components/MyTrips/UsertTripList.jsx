@@ -18,7 +18,7 @@ const UserTripList = ({ userTrips }) => {
               uri:
                 "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=" +
                 LatestTrip?.locationInfo?.photoRef +
-                "&key=AIzaSyBO4KQvkzDP8w9bjo7UcwtL-05xPbkI-5k",
+                "&key="+process.env.GOOGLE_MAPS_API_KEY,
             }}
             style={{
               width: "100%",
