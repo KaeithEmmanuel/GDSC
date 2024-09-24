@@ -33,7 +33,8 @@ export default function SignIn() {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        router.replace('/mytrip')
+        //route to Events page
+        router.replace("");
         // ...
       })
       .catch((error) => {
@@ -60,7 +61,7 @@ export default function SignIn() {
         <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>
       <Text style={{ fontFamily: "outfit-bold", fontSize: 30, marginTop: 30 }}>
-        Lets SignYou In
+        Lets Sign You In
       </Text>
       <Text
         style={{

@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Feather from '@expo/vector-icons/Feather';
 import { Colors } from "../../constants/Colors";
 
 export default function TabLayout() {
@@ -14,9 +15,9 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="mytrip"
+        name="Events"
         options={{
-          tabBarLabel: "My Trip",
+          tabBarLabel: "Events",
           tabBarIcon: ({ color }) => (
             <Ionicons name="location-sharp" size={24} color={color} />
           ),
@@ -24,16 +25,16 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="discover"
+        name="Notifications"
         options={{
-          tabBarLabel: "Discover",
+          tabBarLabel: "Notifications",
           tabBarIcon: ({ color }) => (
-            <Ionicons name="globe-sharp" size={24} color={color} />
+            <Feather name="bell" size={24} color="black" />
           )
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="Profile"
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (

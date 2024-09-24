@@ -18,16 +18,16 @@ const Login = () => {
     return (
         <View style={styles.container}>
             <Image 
-                source={require('./../assets/images/home.jpeg')} 
+                source={require('./../assets/images/download.png')} 
                 style={styles.image}
                 resizeMode="contain"  // Ensure aspect ratio is maintained
             />
             <View style={styles.textContainer}>
                 <Text style={styles.title}>
-                    AI Travel Planner
+                   Google Developer Groups on Campus
                 </Text>
                 <Text style={styles.subtitle}>
-                    Discover your next adventure effortlessly. Personalized itineraries at your fingertips. Travel smarter with AI-driven insights.
+                The GDG Community mobile app enhances engagement by providing event notifications, member profiles, discussion forums, and resource sharing.
                 </Text>
                 <TouchableOpacity style={styles.button}
                     onPress={() => router.push('auth/sign-in')}>
@@ -50,8 +50,9 @@ const styles = StyleSheet.create({
         alignItems: 'center', // Center the image horizontally
     },
     image: {
-        width: '100%',
-        height: 520, // Adjust based on design needs
+        marginTop:'50%',
+        width: '70%',
+        height: 100, // Adjust based on design needs
         aspectRatio: 2,
         resizeMode: 'contain', // Maintain the aspect ratio of the image
     },

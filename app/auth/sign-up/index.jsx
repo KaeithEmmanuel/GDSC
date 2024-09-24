@@ -5,59 +5,49 @@ import {
   StyleSheet,
   TouchableOpacity,
   ToastAndroid,
+  Image,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation, useRouter } from "expo-router";
-import { useEffect, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Colors } from "../../../constants/Colors";
 import { auth } from "../../../configs/FireBaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import * as ImagePicker from "expo-image-picker";
 
 const SignUp = () => {
   const navigation = useNavigation();
   const router = useRouter();
+
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
-  });
+  }, []);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
-  const OnCreateAccount = () => {
-    if (email == "" && password == "" && fullName == "") {
-      ToastAndroid.show(
-        "Please enter all the details",
-        ToastAndroid.LONG
-      );
+  const [image, setImage] = useState(null);
+
+  const OnCreateAccount = async () => {
+    if (!email || !password || !fullName) {
+      ToastAndroid.show("Please enter all the details", ToastAndroid.LONG);
       return;
     }
 
-    console.log(email, password, fullName);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
-        console.log(user);
-        router.replace('mytrip')
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage, errorCode);
-        // ..
-      });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      router.replace("");
+    } catch (error) {
+      console.log(error.message);
+    }
   };
+
+
+
   return (
-    <View
-      style={{
-        padding: 25,
-        backgroundColor: Colors.WHITE,
-        height: "100%",
-        paddingTop: 50,
-      }}
-    >
+    <View style={{ padding: 25, backgroundColor: Colors.WHITE, height: "100%", paddingTop: 50 }}>
       <TouchableOpacity onPress={() => router.back()}>
         <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>
@@ -78,7 +68,7 @@ const SignUp = () => {
           style={styles.input}
           placeholder="Enter Email"
           onChangeText={(value) => setEmail(value)}
-        ></TextInput>
+        />
       </View>
       <View style={{ marginTop: 20 }}>
         <Text style={{ fontFamily: "outfit" }}>Password</Text>
@@ -87,50 +77,18 @@ const SignUp = () => {
           style={styles.input}
           placeholder="Enter Password"
           onChangeText={(value) => setPassword(value)}
-        ></TextInput>
+        />
       </View>
-      <TouchableOpacity
-        onPress={OnCreateAccount}
-        style={{
-          padding: 20,
-          backgroundColor: Colors.PRIMARY,
-          borderRadius: 15,
-          marginTop: 50,
-        }}
-      >
-        <Text
-          style={{
-            color: Colors.WHITE,
-            fontFamily: "outfit-bold",
-            textAlign: "center",
-          }}
-        >
-          Create Account
-        </Text>
+      <TouchableOpacity onPress={OnCreateAccount} style={styles.createAccountButton}>
+        <Text style={styles.createAccountText}>Create Account</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={{
-          padding: 20,
-          backgroundColor: Colors.WHITE,
-          borderRadius: 15,
-          marginTop: 20,
-          borderWidth: 1,
-        }}
-        onPress={() => router.replace("auth/sign-in")}
-      >
-        <Text
-          style={{
-            color: Colors.PRIMARY,
-            fontFamily: "outfit-bold",
-            textAlign: "center",
-          }}
-        >
-          Already Have An Account
-        </Text>
+      <TouchableOpacity style={styles.signInButton} onPress={() => router.replace("auth/sign-in")}>
+        <Text style={styles.signInText}>Already Have An Account</Text>
       </TouchableOpacity>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   input: {
     padding: 15,
@@ -139,6 +97,47 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     fontFamily: "outfit",
     marginTop: 8,
+  },
+  imagePicker: {
+    borderWidth: 1,
+    borderColor: Colors.GRAY,
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 100,
+    marginTop: 20,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 15,
+  },
+  imagePlaceholder: {
+    color: Colors.GRAY,
+    fontFamily: "outfit",
+  },
+  createAccountButton: {
+    padding: 20,
+    backgroundColor: Colors.PRIMARY,
+    borderRadius: 15,
+    marginTop: 50,
+  },
+  createAccountText: {
+    color: Colors.WHITE,
+    fontFamily: "outfit-bold",
+    textAlign: "center",
+  },
+  signInButton: {
+    padding: 20,
+    backgroundColor: Colors.WHITE,
+    borderRadius: 15,
+    marginTop: 20,
+    borderWidth: 1,
+  },
+  signInText: {
+    color: Colors.PRIMARY,
+    fontFamily: "outfit-bold",
+    textAlign: "center",
   },
 });
 
