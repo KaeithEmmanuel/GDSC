@@ -41,3 +41,6 @@ The **GDGC Club Mobile App** is a React Native application built for the Google 
 1. Clone the repository to your local machine:
    ```bash
    git clone https://github.com/your-repo/gdgc-club-app.git
+```Demo of the App
+https://github.com/user-attachments/assets/4d95b62b-ae63-4847-ac87-3063f9022503
+
