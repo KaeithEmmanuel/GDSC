@@ -1,11 +1,13 @@
-// EventCard.js
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const EventCard = ({ event }) => {
   return (
-    <TouchableOpacity style={styles.card} onPress={() => console.log(`Selected: ${event.name}`)}>
+    <TouchableOpacity 
+      style={styles.card} 
+      onPress={() => { console.log('Event Card Pressed'); }}
+    >
       <Image source={{ uri: event.picture }} style={styles.image} />
       <View style={styles.details}>
         <Text style={styles.name}>{event.name}</Text>
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 550,
+    height: 200, // Adjusted height for better UI
     resizeMode: 'cover',
   },
   details: {

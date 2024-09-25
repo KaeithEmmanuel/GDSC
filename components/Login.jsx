@@ -3,7 +3,7 @@ import React from 'react';
 import { Colors } from '@/constants/Colors';
 import { useFonts } from 'expo-font';
 import { useRouter } from 'expo-router';
-
+import MorphingLogo from './AnimatedLogo';
 const Login = () => {
     const [fontsLoaded] = useFonts({
         'outfit': require('./../assets/fonts/Outfit-Regular.ttf'),
@@ -17,11 +17,7 @@ const Login = () => {
 
     return (
         <View style={styles.container}>
-            <Image 
-                source={require('./../assets/images/download.png')} 
-                style={styles.image}
-                resizeMode="contain"  // Ensure aspect ratio is maintained
-            />
+           <MorphingLogo />
             <View style={styles.textContainer}>
                 <Text style={styles.title}>
                    Google Developer Groups on Campus

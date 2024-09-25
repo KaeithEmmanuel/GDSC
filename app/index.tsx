@@ -17,5 +17,6 @@ export default function Index() {
       <Login />
       }
     </View>
+    
   );
 }

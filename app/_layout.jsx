@@ -2,6 +2,7 @@ import { useFonts } from "expo-font";
 import { useState } from "react";
 import { Stack } from "expo-router";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 export default function RootLayout() {
   useFonts({
     'outfit': require('./../assets/fonts/Outfit-Regular.ttf'),
